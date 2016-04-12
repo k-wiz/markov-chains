@@ -12,10 +12,8 @@ def open_and_read_file(file_path):
 
     "This should be a variable that contains your file text as one long string"
     contents = opened_file.read()
-    #print contents
     return contents
 
-#contents = open_and_read_file("green-eggs.txt")
 
 
 def make_chains(text_string):
@@ -31,30 +29,24 @@ def make_chains(text_string):
         {('hi', 'there'): ['mary', 'juanita'], ('there', 'mary'): ['hi'], ('mary', 'hi': ['there']}
     """
     words = text_string.split()
-
+    
     chains = {}
 
     for i in range(len(words) - 2):
+
         key = (words[i], words[i + 1])
         value = words[i + 2]
+
         if key not in chains:
-            print "im here ############################"
             chains[key] = [value]
-            print chains
         else:
-            #add i + 2 to the list of values 
-            # old_value = chains.get(key) #gives the value
-            print key
+            # Generate the current value of key, which is a list.
             old_value = chains[key]
-            print "old value", old_value
-
-            chains[key] = old_value.append(value)
-
+            # Append new value to the key list. 
+            old_value.append(value)
 
 
-
-    # return chains
-    print chains
+    return chains
 
 
 def make_text(chains):
