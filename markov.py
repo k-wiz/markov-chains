@@ -53,31 +53,33 @@ def make_chains(text_string):
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
-    #Initialize empty string.
-    text = ""
 
+    #Generate first key from dict randomly. 
+    key = choice(chains.keys())
+    print "first key is: ", key
+
+    #Add first key to final text.
+    word_1, word_2 = key
+    text = " ".join([word_1, word_2])
+
+    # For each word pair (key) in chains, 
     for word_pair in chains:
 
-        #Generate key from dict randomly. 
-        words_1_and_2 = choice(chains.keys())
-        print "key is: ", words_1_and_2
         #Generate value that corresponds to key; assign it to value_list. 
-        value_list = chains.get(words_1_and_2)  
+        value_list = chains.get(key)  
         print "value_list is: ", value_list
         # pick a random value from key list
         word_3 = choice(value_list)
         print "value is: ", word_3
 
-        word_1, word_2 = words_1_and_2
+        word_1, word_2 = key
 
-        text = text + word_1 + " " + word_2 + " " + word_3
+        text = " ".join([text, word_3])
 
-    print "Text is: ", text
+        key = (word_2, word_3)
 
-    
-
-    # print text
-    # return text
+    print "Text is: ", text    
+    return text
 
 
 input_path = "green-eggs.txt"
