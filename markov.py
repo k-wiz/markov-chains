@@ -38,9 +38,10 @@ def make_chains(text_string):
         value = words[i + 2]
 
         if key not in chains:
+            # Add key to the dictionary.
             chains[key] = [value]
         else:
-            # Generate the current value of key, which is a list.
+            # Generate the current value of key (which is a list).
             old_value = chains[key]
             # Append new value to the key list. 
             old_value.append(value)
@@ -52,25 +53,26 @@ def make_chains(text_string):
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
-    #build a string, or build a list and turn into string later
-
+    #Initialize empty string.
     text = ""
 
-    #Generate key from dict randomly. 
-    words_1_and_2 = choice(chains.keys())
-    print "key is: ", words_1_and_2
-    #Generate value that corresponds to key; assign it to value_list. 
-    value_list = chains.get(words_1_and_2)  
-    print "value_list is: ", value_list
-    # pick a random value from key list
-    word_3 = choice(value_list)
-    print "value is: ", word_3
+    for word_pair in chains:
 
-    word_1, word_2 = words_1_and_2
+        #Generate key from dict randomly. 
+        words_1_and_2 = choice(chains.keys())
+        print "key is: ", words_1_and_2
+        #Generate value that corresponds to key; assign it to value_list. 
+        value_list = chains.get(words_1_and_2)  
+        print "value_list is: ", value_list
+        # pick a random value from key list
+        word_3 = choice(value_list)
+        print "value is: ", word_3
 
-    string_to_add_to_text = word_1 + " " + word_2 + " " + word_3
+        word_1, word_2 = words_1_and_2
 
-    print string_to_add_to_text
+        text = text + word_1 + " " + word_2 + " " + word_3
+
+    print "Text is: ", text
 
     
 
