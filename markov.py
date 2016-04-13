@@ -56,29 +56,28 @@ def make_text(chains):
 
     #Generate first key from dict randomly. 
     key = choice(chains.keys())
-    print "first key is: ", key
 
     #Add first key to final text.
     word_1, word_2 = key
     text = " ".join([word_1, word_2])
 
-    # For each word pair (key) in chains, 
-    for word_pair in chains:
+    # While key does not return a value of []
+    while True:
+        try:
 
-        #Generate value that corresponds to key; assign it to value_list. 
-        value_list = chains.get(key)  
-        print "value_list is: ", value_list
-        # pick a random value from key list
-        word_3 = choice(value_list)
-        print "value is: ", word_3
+            #Get value from key; assign it to value_list. 
+            value_list = chains.get(key)  
+            # pick a random word from value list
+            word_3 = choice(value_list)
+            # Add it to the final text.
+            text = " ".join([text, word_3])
+            # reset the key
+            word_1, word_2 = key
+            key = (word_2, word_3)
 
-        word_1, word_2 = key
+        except TypeError:
+            return text
 
-        text = " ".join([text, word_3])
-
-        key = (word_2, word_3)
-
-    print "Text is: ", text    
     return text
 
 
@@ -89,7 +88,6 @@ input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
 chains = make_chains(input_text)
-print chains
 
 # Produce random text
 random_text = make_text(chains)
