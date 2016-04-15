@@ -41,10 +41,8 @@ def make_chains(text_string):
             # Add key to the dictionary.
             chains[key] = [value]
         else:
-            # Generate the current value of key (which is a list).
-            old_value = chains[key]
             # Append new value to the key list. 
-            old_value.append(value)
+            chains[key].append(value)
 
 
     return chains
